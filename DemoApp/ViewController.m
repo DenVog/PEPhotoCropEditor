@@ -159,11 +159,16 @@
  */
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
-    if ([buttonTitle isEqualToString:NSLocalizedString(@"Photo Album", nil)]) {
-        [self openPhotoAlbum];
-    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Camera", nil)]) {
-        [self showCamera];
+    switch (buttonIndex) {
+        case 0:
+            // delay so action sheet can close before picker arrives!
+            [self  performSelector:@selector(openPhotoAlbum) withObject:self afterDelay:0.1];
+            break;
+        case 1:
+            [self  performSelector:@selector(showCamera) withObject:self afterDelay:0.1];
+            break;
+        default:
+            break;
     }
 }
 
